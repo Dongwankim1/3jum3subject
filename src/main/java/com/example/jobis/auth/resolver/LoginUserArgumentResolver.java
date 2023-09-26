@@ -1,12 +1,10 @@
 package com.example.jobis.auth.resolver;
 
 import com.example.jobis.member.domain.Member;
-import com.example.jobis.member.dto.MemberInfoDTO;
+
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;

@@ -1,7 +1,6 @@
-package com.example.jobis.config;
+package com.example.jobis.filter;
 
-import antlr.StringUtils;
-import antlr.Token;
+import com.example.jobis.util.TokenProvider;
 import com.example.jobis.member.domain.Member;
 import com.example.jobis.member.repository.MemberRepository;
 import io.jsonwebtoken.Claims;
@@ -13,7 +12,6 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Optional;
-import java.util.logging.LogRecord;
 
 /**
  * packageName    : com.example.jobis.config

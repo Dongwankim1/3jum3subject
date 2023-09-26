@@ -1,13 +1,10 @@
-package com.example.jobis.config;
+package com.example.jobis.util;
 
 
 import com.example.jobis.member.domain.Member;
 import com.example.jobis.member.payload.AuthResponse;
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
 
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -40,7 +37,7 @@ public class TokenProvider {
                 .claim("name",member.getName())
                 .claim("regNo",member.getRegNo())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()*3600))
+                .setExpiration(new Date(System.currentTimeMillis()*3600000))
                 .signWith(SignatureAlgorithm.HS512,secretKey.getBytes("UTF-8"))
                 .compact();
     }

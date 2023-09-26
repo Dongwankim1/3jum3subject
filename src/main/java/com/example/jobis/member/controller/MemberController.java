@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * packageName    : com.example.jobis.member.controller
@@ -73,9 +74,9 @@ public class MemberController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "NOT FOUND !!"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR !!")
     })
-    @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, allowEmptyValue = false, paramType = "header", dataTypeClass = String.class, example = "Bearer eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFM1MTIifQ.eyJzdWIiOiJBVEsiLCJ1c2VySWQiOiJob25nMTIiLCJuYW1lIjoi7ZmN6ri464-ZIiwicmVnTm8iOiJLZEw4NFByL1RwYTZhSVZFamxBaTZRPT0iLCJpYXQiOjE2OTU2NTU3MTYsImV4cCI6NjEwNDM2MDU3OTU2OX0.Qd6iPXVIxRrqELUjupmTWSn4eBHF7GGx7FZAKE4q5UaAv2qi4nelAaweqbVn6D0yfnl190dNBqXqFDKjHygK1g")
+    @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, allowEmptyValue = false, paramType = "header", dataTypeClass = String.class, example = "Bearer eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFM1MTIifQ.eyJzdWIiOiJBVEsiLCJ1c2VySWQiOiJob25nMTIiLCJuYW1lIjoi7ZmN6ri464-ZIiwicmVnTm8iOiJLZEw4NFByL1RwYTZhSVZFamxBaTZRPT0iLCJpYXQiOjE2OTU3MTY2ODEsImV4cCI6NjEwNDU4MDA1MjQ0NjAwMH0.ngyRK6OVUSIgjodAKA4x2nbZR85HWWlS76o4YUFTnh2bsa2iArQjfMs_Fi9iwrPcVX2b3nKHaMlZERtDlC7nqA")
     @GetMapping("/szs/me")
-    public ResponseEntity<MemberInfoDTO> userMe(@ApiIgnore @LoginUser Member member) throws Exception {
+    public ResponseEntity<MemberInfoDTO> userMe(@ApiIgnore @LoginUser Member member) {
 
         return ResponseEntity.ok().body(MemberInfoDTO.builder().name(member.getName()).userId(member.getUserId()).build());
     }
@@ -88,11 +89,27 @@ public class MemberController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "NOT FOUND !!"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR !!")
     })
-    @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, allowEmptyValue = false, paramType = "header", dataTypeClass = String.class, example = "Bearer eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFM1MTIifQ.eyJzdWIiOiJBVEsiLCJ1c2VySWQiOiJob25nMTIiLCJuYW1lIjoi7ZmN6ri464-ZIiwicmVnTm8iOiJLZEw4NFByL1RwYTZhSVZFamxBaTZRPT0iLCJpYXQiOjE2OTU2NTU3MTYsImV4cCI6NjEwNDM2MDU3OTU2OX0.Qd6iPXVIxRrqELUjupmTWSn4eBHF7GGx7FZAKE4q5UaAv2qi4nelAaweqbVn6D0yfnl190dNBqXqFDKjHygK1g")
+    @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, allowEmptyValue = false, paramType = "header", dataTypeClass = String.class, example = "Bearer eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFM1MTIifQ.eyJzdWIiOiJBVEsiLCJ1c2VySWQiOiJob25nMTIiLCJuYW1lIjoi7ZmN6ri464-ZIiwicmVnTm8iOiJLZEw4NFByL1RwYTZhSVZFamxBaTZRPT0iLCJpYXQiOjE2OTU3MTY2ODEsImV4cCI6NjEwNDU4MDA1MjQ0NjAwMH0.ngyRK6OVUSIgjodAKA4x2nbZR85HWWlS76o4YUFTnh2bsa2iArQjfMs_Fi9iwrPcVX2b3nKHaMlZERtDlC7nqA")
     @PostMapping("/szs/scrap")
-    public ResponseEntity<MemberInfoDTO> scrap(@ApiIgnore @LoginUser Member member) throws Exception {
+    public ResponseEntity<MemberInfoDTO> scrap(@ApiIgnore @LoginUser Member member) {
 
         return ResponseEntity.ok().body(MemberInfoDTO.builder().name(member.getName()).userId(member.getUserId()).build());
+    }
+
+    @Operation(summary = "결정세액,퇴직연금세액공제금액 계산 API", description = "결정세액,퇴직연금세액공제금액 계산 API")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "OK !!"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "BAD REQUEST !!"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "NOT FOUND !!"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR !!")
+    })
+    @ApiImplicitParam(name = "Authorization", value = "Access Token", required = true, allowEmptyValue = false, paramType = "header", dataTypeClass = String.class, example = "Bearer eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFM1MTIifQ.eyJzdWIiOiJBVEsiLCJ1c2VySWQiOiJob25nMTIiLCJuYW1lIjoi7ZmN6ri464-ZIiwicmVnTm8iOiJLZEw4NFByL1RwYTZhSVZFamxBaTZRPT0iLCJpYXQiOjE2OTU3MTY2ODEsImV4cCI6NjEwNDU4MDA1MjQ0NjAwMH0.ngyRK6OVUSIgjodAKA4x2nbZR85HWWlS76o4YUFTnh2bsa2iArQjfMs_Fi9iwrPcVX2b3nKHaMlZERtDlC7nqA")
+    @PostMapping("/szs/refund")
+    public ResponseEntity<Map<String,String>> refund(@ApiIgnore @LoginUser Member member) {
+
+        Map<String,String> result = memberServiceImp.refund(member);
+
+        return ResponseEntity.ok().body(result);
     }
 
 
